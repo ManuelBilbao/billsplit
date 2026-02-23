@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-please-change-me-to-a-real-secret-key-base-that-is-at-least-64-chars}
+      DATABASE_PATH: /app/data/billsplit.db
+      PHX_HOST: ${PHX_HOST:-localhost}
+      PHX_SERVER: "true"
+    volumes:
+      - billsplit_data:/app/data
+
+volumes:
+  billsplit_data:

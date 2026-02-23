@@ -1,4 +1,4 @@
-.PHONY: help setup server test compile migrate reset seed format lint clean
+.PHONY: help setup server test compile migrate reset seed format lint clean docker-build docker-up docker-down
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -48,3 +48,12 @@ deps: ## Fetch and compile dependencies
 
 routes: ## Show all routes
 	mix phx.routes
+
+docker-build: ## Build Docker image
+	docker compose build
+
+docker-up: ## Start app in Docker
+	docker compose up
+
+docker-down: ## Stop Docker containers
+	docker compose down

@@ -1,0 +1,23 @@
+_build/
+deps/
+.git/
+.elixir_ls/
+.lexical/
+node_modules/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Dev/test artifacts
+.env
+.fetch
+tmp/
+cover/
+doc/
+
+# Docker
+docker-compose*.yml
+Dockerfile
+.dockerignore
