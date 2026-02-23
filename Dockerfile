@@ -1,7 +1,7 @@
 # Build stage
 ARG ELIXIR_VERSION=1.15.8
-ARG OTP_VERSION=26.2.5.6
-ARG DEBIAN_VERSION=bookworm-20241016-slim
+ARG OTP_VERSION=26.2.5.17
+ARG DEBIAN_VERSION=bookworm-20260202-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
@@ -27,8 +27,8 @@ RUN mix deps.compile
 COPY priv priv
 COPY lib lib
 COPY assets assets
-RUN mix assets.deploy
 RUN mix compile
+RUN mix assets.deploy
 
 COPY rel rel
 RUN mix release
@@ -49,6 +49,7 @@ ENV LC_ALL en_US.UTF-8
 WORKDIR /app
 
 RUN chown nobody /app
+RUN mkdir -p /app/data && chown nobody:root /app/data
 
 COPY --from=builder --chown=nobody:root /app/_build/prod/rel/billsplit ./
 
